@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import {Navigation, Footer, Header, About, FAQs, Reserve, Help} from "./components";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let languageStoredInLocalStorage = localStorage.getItem("language");
+    let [language, setLanguage] = useState(
+        languageStoredInLocalStorage ? languageStoredInLocalStorage : "English"
+    );
+
+    return (
+        <div className="App">
+            <Navigation
+                language={language}
+                handleSetLanguage={language => {
+                    setLanguage(language);
+                    storeLanguageInLocalStorage(language);
+                }}
+            />
+            <Header language={language} />
+            <About language={language} />
+            <FAQs language={language} />
+            <Reserve language={language} />
+            <Help language={language} />
+            <Footer language={language} />
+        </div>
+    );
+}
+
+function storeLanguageInLocalStorage(language) {
+    localStorage.setItem("language", language);
 }
 
 export default App;
