@@ -1,10 +1,27 @@
 import React from 'react';
 import '../App.css';
 import '../bootstrap.css';
+import APIService from '../services/APIService';
 
 class FAQs extends React.Component {
-    componentDidMount() {
+    
+    constructor(props){
+        super(props);
+        this.state ={
+            faqList:[]
+        }
+    };
+
+    componentDidMount(){
         window.toggle();
+        this.getFAQs();
+    }
+
+    getFAQs(){
+        APIService.getFAQs()
+        .then((response) => {
+            this.setState({faqList : response})
+        });
     }
 
     render() {
@@ -17,6 +34,25 @@ class FAQs extends React.Component {
                                 <div className="col-lg-6 col-xl-5">
                                     <div className="text-container">
                                         <h1>FAQs</h1>
+
+                                        {/* ova dodadov */}
+                                        {
+                                            this.state.faqList === 0 ?
+                                                <h3>No FAQs Available</h3>
+                                                :
+                                                
+                                                this.state.faqList.map((faq) => (
+                                                    <div>
+                                                        <button className="accordion">{faq.question}</button>
+                                                        <div className="panel">
+                                                            <p>{faq.answer}</p>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                        }
+
+                                        {/* do tuka */}
+
                                         <button className="accordion">Question</button>
                                         <div className="panel">
                                             <p>Answer</p>

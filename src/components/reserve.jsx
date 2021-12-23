@@ -1,12 +1,42 @@
 import React from 'react';
 import '../App.css';
 import '../bootstrap.css';
+import APIService from '../services/APIService';
+
+/*tuka na klik na kopce da se prati reservation kako slednovo
+  const reservation = {
+   user_id: [int value],
+   location_id : [int value],
+   date_time : [Date value]
+  };
+
+  na metoda -> APIService.postReservation(reservation);
+
+*/ 
 
 class Reserve extends React.Component {
+    
+    constructor(props){
+        super(props);
+        this.state ={
+            locationsList:[]
+        }
+    };
+
     componentDidMount() {
         window.nav();
         window.nav2();
+
+        this.getLocations();
     }
+
+    getLocations(){
+        APIService.getLocations()
+        .then((response) => {
+            this.setState({locationsList : response})
+        });
+    }
+
     render () {
         return (
             <div id="reserve">
@@ -17,6 +47,20 @@ class Reserve extends React.Component {
                                 <div className="col-lg-6 col-xl-5">
                                     <div className="text-container">
                                         <h1>Reserve now!</h1>
+
+                                        {/* ova go dodadov */}
+                                        <label htmlFor="charger">Choose charging station:</label>&nbsp;
+                                        <select name="charger" id="station">
+                                            {
+                                                this.state.locationsList !== 0 ?
+                                                    this.state.locationsList.map((location) => (
+                                                        <option value={location.id}>{location.address}</option>
+                                                    ))
+                                                : <option value="0">No Charging Station Available</option>
+                                            }
+                                        </select><br></br><br></br>
+                                        {/* //do tuka         */}
+
                                         <label htmlFor="charger">Choose charging type:</label>&nbsp;
                                         <select name="charger" id="charger">
                                             <option value="Wallbe Pro">Wallbe Pro</option>
