@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom';
 
 function SignUp() {
     return (
-        <div>
+        <div id="sign-up">
             <header id="header" className="ex-2-header">
                 <div className="container">
-                    <Link to={"/sign-up"}></Link>
                     <div className="row">
                         <div className="col-lg-12">
                             <h1>Sign Up</h1>
