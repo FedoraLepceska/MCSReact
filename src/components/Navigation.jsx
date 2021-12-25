@@ -14,7 +14,8 @@ function Navigation(props) {
             MyProfile: "My Profile",
             Help: "Help",
             Login: "Login",
-            Signup: "Sign up"
+            Signup: "Sign up",
+            Logout: "Logout"
         },
         Macedonian: {
             home: "Почетна",
@@ -25,7 +26,8 @@ function Navigation(props) {
             MyProfile: "Мој профил",
             Help: "Помош",
             Login: "Најава",
-            Signup: "Регистрирај се"
+            Signup: "Регистрирај се",
+            Logout: "Одјави се"
         },
         Albanian: {
             home: "Shtëpi",
@@ -36,7 +38,8 @@ function Navigation(props) {
             MyProfile: "Profili im",
             Help: "",
             Login: "Login",
-            Signup: "Sign up"
+            Signup: "Sign up",
+            Logout: "Logout"
         }
     };
 
@@ -49,7 +52,7 @@ function Navigation(props) {
         content = content.Albanian
     }
 
-    if(localStorage.getItem('token') !== null){
+    if(localStorage.getItem('token') === null){
 
         return (
                 <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
@@ -75,8 +78,8 @@ function Navigation(props) {
                                     <Link to="faqs" spy={true} smooth={true} offset={50} duration={500} className="nav-link dropdown-toggle page-scroll" href="/faqs" id="navbarDropdown2"
                                         role="button" aria-haspopup="true" aria-expanded="false">{content.FAQs}</Link>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a className="dropdown-item" href="/analytics"><span
-                                            className="item-text">{content.Analytics}</span></a>
+                                        <Link to="analytics" className="dropdown-item" href="/analytics"><span
+                                            className="item-text">{content.Analytics}</span></Link>
                                         <Link to="help" className="dropdown-item" href="/help"><span
                                             className="item-text">{content.Help}</span></Link>
                                     </div>
@@ -86,7 +89,7 @@ function Navigation(props) {
                                     <Link to="aboutUs" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="/about">{content.AboutUs}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link page-scroll" href="/my-profile">{content.MyProfile}</a>
+                                    <Link to="my-profile" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="/my-profile" >{content.MyProfile}</Link>
                                 </li>
                                 <li>
                                     <div className="language-select">

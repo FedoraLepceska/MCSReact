@@ -13,7 +13,7 @@ import {
     MyProfile,
     Reserve,
     SignUp,
-    LogIn
+    LogIn,
 } from "./components";
 ReactDOM.render(
     <Router>

@@ -2185,8 +2185,6 @@ a:hover.back-to-top {
 .panel {
   padding: 0 18px;
   background-color: white;
-  max-height: 0;
-  overflow: hidden;
   transition: max-height 0.2s ease-out;
   border-radius: 5px 5px 15px 15px;
 
@@ -2194,18 +2192,18 @@ a:hover.back-to-top {
 .panel p {
   margin: 5px;
 }
-.accordion:after {
-  content: '\02795';
-  font-size: 13px;
-  color: blueviolet;
-  float: right;
-  margin-left: 5px;
-}
+/*.accordion:after {*/
+/*  content: '\02795';*/
+/*  font-size: 13px;*/
+/*  color: blueviolet;*/
+/*  float: right;*/
+/*  margin-left: 5px;*/
+/*}*/
 
-.active:after {
-  content: "\2796";
-  margin-top: 0;
-}
+/*.active:after {*/
+/*  content: "\2796";*/
+/*  margin-top: 0;*/
+/*}*/
 .margin {
   margin-left: 150px;
 }
@@ -2313,4 +2311,82 @@ button[type="submit"]:hover {
 }
 .quesrep{
   color: white;
+}
+/*my profile css*/
+.form-control:focus {
+  box-shadow: none;
+  border-color: #99aacc;
+}
+
+.profile-button {
+  background: #99aacc;
+  box-shadow: none;
+  border: none;
+}
+
+.profile-button:hover {
+  background: blueviolet;
+}
+
+.profile-button:focus {
+  background:blueviolet;
+  box-shadow: none
+}
+
+.profile-button:active {
+  background: blueviolet;
+  box-shadow: none
+}
+
+.back:hover {
+  color: blueviolet;
+  cursor: pointer
+}
+
+.labels {
+  font-size: 11px
+}
+
+/*ratings*/
+
+.stars-outer {
+  position: relative;
+  display: inline-block;
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-outer::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #ccc;
+}
+
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #f8ce0b;
+}
+
+.paddings {
+  padding: 10px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.heightButton {
+  height: 10px;
 }

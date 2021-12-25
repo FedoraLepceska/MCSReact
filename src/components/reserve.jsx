@@ -50,7 +50,7 @@ class Reserve extends React.Component {
 
                                         {/* ova go dodadov */}
                                         <label htmlFor="charger">Choose charging station:</label>&nbsp;
-                                        <select name="charger" id="station">
+                                        <select name="charger" id="station" className="paddings">
                                             {
                                                 this.state.locationsList !== 0 ?
                                                     this.state.locationsList.map((location) => (
