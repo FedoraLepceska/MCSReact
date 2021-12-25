@@ -35,7 +35,7 @@ function Help(){
                                             <textarea name="massage" id="massage" cols="30" rows="5"></textarea>
                                         </div>
 
-                                        <button type="submit">Submit</button>
+                                        <button type="submit" class="form-control-submit-button">Submit</button>
                                     </form>
                                 </div>
                                 <div id="status"></div>

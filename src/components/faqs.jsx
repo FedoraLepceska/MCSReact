@@ -8,19 +8,20 @@ class FAQs extends React.Component {
     constructor(props){
         super(props);
         this.state ={
-            faqList:[]
+            faqsList:[]
         }
     };
 
     componentDidMount(){
         window.toggle();
+
         this.getFAQs();
     }
 
     getFAQs(){
         APIService.getFAQs()
         .then((response) => {
-            this.setState({faqList : response})
+            this.setState({faqsList : response})
         });
     }
 
@@ -37,11 +38,11 @@ class FAQs extends React.Component {
 
                                         {/* ova dodadov */}
                                         {
-                                            this.state.faqList === 0 ?
+                                            this.state.faqsList === 0 ?
                                                 <h3>No FAQs Available</h3>
                                                 :
                                                 
-                                                this.state.faqList.map((faq) => (
+                                                this.state.faqsList.map((faq) => (
                                                     <div>
                                                         <button className="accordion">{faq.question}</button>
                                                         <div className="panel">

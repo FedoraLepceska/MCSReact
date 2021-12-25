@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Navigation, Footer, Header, About, FAQs, Reserve, Help} from "./components";
+import {Navigation, Footer, Header, About, FAQs, Reserve, Help, LogIn, SignUp} from "./components";
 
 function App() {
     let languageStoredInLocalStorage = localStorage.getItem("language");
@@ -7,23 +7,41 @@ function App() {
         languageStoredInLocalStorage ? languageStoredInLocalStorage : "English"
     );
 
-    return (
-        <div className="App">
-            <Navigation
-                language={language}
-                handleSetLanguage={language => {
-                    setLanguage(language);
-                    storeLanguageInLocalStorage(language);
-                }}
-            />
-            <Header language={language} />
-            <About language={language} />
-            <FAQs language={language} />
-            <Reserve language={language} />
-            <Help language={language} />
-            <Footer language={language} />
-        </div>
-    );
+    if(localStorage.getItem('token') !== null){
+        return (
+            <div className="App">
+                <Navigation
+                    language={language}
+                    handleSetLanguage={language => {
+                        setLanguage(language);
+                        storeLanguageInLocalStorage(language);
+                    }}
+                />
+                <Header language={language} />
+                <About language={language} />
+                <FAQs language={language} />
+                <Reserve language={language} />
+                <Help language={language} />
+                <Footer language={language} />
+            </div>
+        );
+    }
+    else {
+        return (
+            <div className="App">
+                <Navigation
+                    language={language}
+                    handleSetLanguage={language => {
+                        setLanguage(language);
+                        storeLanguageInLocalStorage(language);
+                    }}
+                />
+                <LogIn language={language} />
+                <SignUp language={language} />
+                <Footer language={language} />
+            </div>
+        );
+    }
 }
 
 function storeLanguageInLocalStorage(language) {
