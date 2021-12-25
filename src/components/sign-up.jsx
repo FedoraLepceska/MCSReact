@@ -1,8 +1,52 @@
 import React from 'react';
 import '../App.css'
-import { Link } from 'react-router-dom';
+import {Link} from "react-scroll";
 
-function SignUp() {
+function SignUp(props) {
+    let contentSignup = {
+        English: {
+            home: "Home",
+            reserve: "Reserve",
+            FAQs: "FAQs",
+            Analytics: "Analytics",
+            AboutUs: "About us",
+            MyProfile: "My Profile",
+            Help: "Help",
+            Login: "Login",
+            Signup: "Sign up"
+        },
+        Macedonian: {
+            home: "Почетна",
+            reserve: "Резервирај",
+            FAQs: "FAQs",
+            Analytics: "Аналитика",
+            AboutUs: "За нас",
+            MyProfile: "Мој профил",
+            Help: "Помош",
+            Login: "Најава",
+            Signup: "Регистрирај се"
+        },
+        Albanian: {
+            home: "Shtëpi",
+            reserve: "Rezervë",
+            FAQs: "FAQs",
+            Analytics: "Analitikë",
+            AboutUs: "Rreth nesh",
+            MyProfile: "Profili im",
+            Help: "",
+            Login: "Login",
+            Signup: "Sign up"
+        }
+    };
+
+    if(props.language === "Macedonian") {
+        contentSignup = contentSignup.Macedonian;
+    }
+    else if(props.language === "English"){
+        contentSignup = contentSignup.English
+    }else {
+        contentSignup = contentSignup.Albanian
+    }
     return (
         <div id="sign-up">
             <header id="header" className="ex-2-header">
@@ -10,8 +54,10 @@ function SignUp() {
                     <div className="row">
                         <div className="col-lg-12">
                             <h1>Sign Up</h1>
-                            <p>Fill out the form below to sign up for Tivo. Already signed up? Then just <a
-                                className="white" href="log-in.jsx">Log In</a></p>
+                            <p>Fill out the form below to sign up. Already signed up? Then just
+                                <span className="nav-item">
+                                 <Link to="log-in" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="./log-in">{contentSignup.Login}</Link>
+                            </span></p>
                             <div className="form-container">
                                 <form id="signUpForm" data-toggle="validator" data-focus="false">
                                     <div className="form-group">

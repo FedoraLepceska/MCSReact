@@ -122,10 +122,10 @@ function Navigation(props) {
                 <div className="collapse navbar-collapse" id="navbarsExampleDefault">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <Link to="log-in" className="nav-link page-scroll" href="./log-in">{content.Login}</Link>
+                            <Link to="log-in" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="./log-in">{content.Login}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="sign-up" className="nav-link page-scroll" href="./sign-up">{content.Signup}</Link>
+                            <Link to="sign-up" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="./sign-up">{content.Signup}</Link>
                         </li>
 
                     
