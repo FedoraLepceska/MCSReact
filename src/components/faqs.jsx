@@ -1,28 +1,16 @@
 import React from 'react';
 import '../App.css';
 import '../bootstrap.css';
-import APIService from '../services/APIService';
 
 class FAQs extends React.Component {
     
     constructor(props){
         super(props);
-        this.state ={
-            faqsList:[]
-        }
     };
 
     componentDidMount(){
         //window.toggle();
 
-        this.getFAQs();
-    }
-
-    getFAQs(){
-        APIService.getFAQs()
-        .then((response) => {
-            this.setState({faqsList : response})
-        });
     }
 
     render() {
@@ -109,21 +97,6 @@ class FAQs extends React.Component {
                                 <div className="col-lg-6 col-xl-5">
                                     <div className="text-container">
                                         <h1>FAQs</h1>
-
-                                        {
-                                            this.state.faqsList === 0 ?
-                                                <h3>No FAQs Available</h3>
-                                                :
-                                                
-                                                this.state.faqsList.map((faq) => (
-                                                    <div>
-                                                        <button className="accordion">{faq.question}</button>
-                                                        <div className="panel">
-                                                            <p>{faq.answer}</p>
-                                                        </div>
-                                                    </div>
-                                                ))
-                                        }
 
                                         <button className="accordion">{content.q1}</button>
                                         <div className="panel">

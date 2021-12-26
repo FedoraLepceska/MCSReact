@@ -2,7 +2,6 @@ import React from "react";
 import "../App.css";
 import { Link } from "react-scroll";
 import '../bootstrap.css';
-import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 function Navigation(props) {
     let content = {
@@ -59,7 +58,6 @@ function Navigation(props) {
         window.location.reload(false);
     }
 
-    console.log("Coookie " + read_cookie('token'))
 
     if(localStorage.getItem('token') !== null){
         return (

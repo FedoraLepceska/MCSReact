@@ -3,7 +3,6 @@ import '../App.css';
 import '../bootstrap.css';
 import { Link } from "react-scroll";
 import APIService from '../services/APIService';
-import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 function LogIn(props) {
     let contentLogin = {
