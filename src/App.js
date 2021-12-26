@@ -19,7 +19,7 @@ function App() {
         languageStoredInLocalStorage ? languageStoredInLocalStorage : "English"
     );
 
-    if(localStorage.getItem('token') === null){
+    if(localStorage.getItem('token') !== null){
         return (
             <div className="App">
                 <Navigation

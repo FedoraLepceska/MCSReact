@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css'
-import {Link} from "react-scroll";
+import { Link } from "react-scroll";
+import APIService from '../services/APIService';
 
 function SignUp(props) {
+
     let contentSignup = {
         English: {
             home: "Home",
@@ -39,14 +41,61 @@ function SignUp(props) {
         }
     };
 
-    if(props.language === "Macedonian") {
+    if (props.language === "Macedonian") {
         contentSignup = contentSignup.Macedonian;
     }
-    else if(props.language === "English"){
+    else if (props.language === "English") {
         contentSignup = contentSignup.English
-    }else {
+    } else {
         contentSignup = contentSignup.Albanian
     }
+
+    const [MCS_User, setMCS_User] = useState({
+        name: "",
+        surname: "",
+        email: "",
+        password: "",
+        phone: "",
+        car_model: "",
+        car_plate: ""
+    })
+
+    const [ConfirmPassword, setConfirmPassword] = useState('')
+
+    // function checkPasswords(e){
+    //     document.getElementById("msgPass").innerHTML = ""
+    //     setConfirmPassword(e.target.value);
+
+    //     console.log(ConfirmPassword);
+    //     if(MCS_User.password !== ConfirmPassword)
+    //         document.getElementById("msgPass").innerHTML = "Passwords don't match."
+    // }
+
+    function onChangeSignUp(e) {
+        document.getElementById("smsgSubmit").innerHTML = ""
+        const new_mcs_user = { ...MCS_User };
+        new_mcs_user[e.target.id] = e.target.value;
+        setMCS_User(new_mcs_user);
+        //console.log(new_mcs_user);
+    }
+
+    function register(e) {
+        e.preventDefault();
+       // console.log("clicked");
+        document.getElementById("smsgSubmit").innerHTML = "";
+        document.getElementById("msgPass").innerHTML = "";
+
+        
+        // make API call
+        APIService.register(MCS_User)
+            .then((response) => {
+                document.getElementById("smsgSubmit").innerHTML = "You've been successfully signed up. <br/> Please login now.";
+            }).catch(err => {
+                document.getElementById("smsgSubmit").innerHTML = "Register not successful. <br/> Please try again.";
+            })
+    }
+
+
     return (
         <div id="sign-up">
             <header id="header" className="ex-2-header">
@@ -56,29 +105,113 @@ function SignUp(props) {
                             <h1>Sign Up</h1>
                             <p>Fill out the form below to sign up. Already signed up? Then just
                                 <span className="nav-item">
-                                 <Link to="log-in" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="./log-in">{contentSignup.Login}</Link>
-                            </span></p>
+                                    <Link to="log-in" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="./log-in">{contentSignup.Login}</Link>
+                                </span></p>
                             <div className="form-container">
-                                <form id="signUpForm" data-toggle="validator" data-focus="false">
+                                <form onSubmit={(e) => register(e)} id="signUpForm" data-toggle="validator" data-focus="false">
                                     <div className="form-group">
-                                        <input type="email" className="form-control-input" id="semail" required></input>
-                                            <label className="label-control" htmlFor="semail">Email</label>
-                                            <div className="help-block with-errors"></div>
+                                        <input
+                                            onChange={(e) => onChangeSignUp(e)}
+                                            id="name"
+                                            value={MCS_User.name}
+                                            placeholder="name"
+                                            pe="text"
+                                            className="form-control-input"
+                                            required>
+                                        </input>
+                                        <div className="help-block with-errors"></div>
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" className="form-control-input" id="sname" required></input>
-                                            <label className="label-control" htmlFor="sname">Name</label>
-                                            <div className="help-block with-errors"></div>
-                                    </div>
-                                    <div className="form-group">
-                                        <input type="text" className="form-control-input" id="spassword" required></input>
-                                            <label className="label-control" htmlFor="spassword">Password</label>
-                                            <div className="help-block with-errors"></div>
+                                        <input
+                                            onChange={(e) => onChangeSignUp(e)}
+                                            id="surname"
+                                            value={MCS_User.surname}
+                                            placeholder="surname"
+                                            type="text"
+                                            className="form-control-input"
+                                            required>
+                                        </input>
+                                        <div className="help-block with-errors"></div>
                                     </div>
 
                                     <div className="form-group">
+                                        <input
+                                            onChange={(e) => onChangeSignUp(e)}
+                                            id="phone"
+                                            value={MCS_User.phone}
+                                            placeholder="phone"
+                                            type="text"
+                                            className="form-control-input"
+                                            required>
+                                        </input>
+                                        <div className="help-block with-errors"></div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <input
+                                            onChange={(e) => onChangeSignUp(e)}
+                                            id="car_model"
+                                            value={MCS_User.car_model}
+                                            placeholder="car model"
+                                            type="text"
+                                            className="form-control-input"
+                                            required>
+                                        </input>
+                                        <div className="help-block with-errors"></div>
+                                    </div>
+                                    <div className="form-group">
+                                        <input
+                                            onChange={(e) => onChangeSignUp(e)}
+                                            id="car_plate"
+                                            value={MCS_User.car_plate}
+                                            placeholder="car plate"
+                                            type="text"
+                                            className="form-control-input"
+                                            required>
+                                        </input>
+                                        <div className="help-block with-errors"></div>
+                                    </div>
+                                    <div className="form-group">
+                                        <input
+                                            onChange={(e) => onChangeSignUp(e)}
+                                            id="email"
+                                            value={MCS_User.email}
+                                            placeholder="email"
+                                            type="email"
+                                            className="form-control-input"
+                                            required>
+                                        </input>
+                                        <div className="help-block with-errors"></div>
+                                    </div>
+                                    <div className="form-group">
+                                        <input
+                                            onChange={(e) => onChangeSignUp(e)}
+                                            id="password"
+                                            value={MCS_User.password}
+                                            placeholder="password"
+                                            type="password"
+                                            className="form-control-input"
+                                            required>
+                                        </input>
+                                        <div className="help-block with-errors"></div>
+                                    </div>
+                                    <div className="form-group">
+                                        <input
+                                            // onChange={(e) => checkPasswords(e)}
+                                            id="confirmPassword"
+                                            placeholder="confirm password"
+                                            type="password"
+                                            value={ConfirmPassword}
+                                            className="form-control-input"
+                                            required>
+                                        </input>
+                                        <div id="msgPass" className="help-block with-errors"></div>
+                                    </div>
+
+
+                                    <div className="form-group">
                                         <button type="submit" className="form-control-submit-button"
-                                                href="home.jsx">SIGN UP
+                                            href="home.jsx">SIGN UP
                                         </button>
                                     </div>
                                     <div className="form-message">

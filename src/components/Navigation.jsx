@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import { Link } from "react-scroll";
 import '../bootstrap.css';
+import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
 
 function Navigation(props) {
     let content = {
@@ -52,8 +53,15 @@ function Navigation(props) {
         content = content.Albanian
     }
 
-    if(localStorage.getItem('token') === null){
+    function logout(){
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        window.location.reload(false);
+    }
 
+    console.log("Coookie " + read_cookie('token'))
+
+    if(localStorage.getItem('token') !== null){
         return (
                 <nav className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
                     <div className="container">
@@ -90,6 +98,9 @@ function Navigation(props) {
                                 </li>
                                 <li className="nav-item">
                                     <Link to="my-profile" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="/my-profile" >{content.MyProfile}</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <button className = "logout-button" onClick={logout}>{content.Logout}</button>
                                 </li>
                                 <li>
                                     <div className="language-select">
@@ -130,7 +141,6 @@ function Navigation(props) {
                         <li className="nav-item">
                             <Link to="sign-up" spy={true} smooth={true} offset={50} duration={500} className="nav-link page-scroll" href="./sign-up">{content.Signup}</Link>
                         </li>
-
                     
                         <li>
                             <div className="language-select">

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from "react";
 import '../App.css';
 import '../bootstrap.css';
 import APIService from "../services/APIService";
-import Rating from "./Rating";
 import { Bar } from "react-chartjs-2"
+import { FaStar } from "react-icons/fa";
+import { Container, Radio, Rating } from "./RatingStyles";
 
 const state = {
     labels: ['Monday', 'Tuesday', 'Wednesday',
@@ -20,23 +21,48 @@ const state = {
 }
 
 class Analytics extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state ={
-            locationsList:[]
+        this.state = {
+            locationsList: [],
+            rate: 0
         }
+
     };
+
 
     componentDidMount() {
         this.getLocations();
     }
 
-    getLocations(){
+    getLocations() {
         APIService.getLocations()
             .then((response) => {
-                this.setState({locationsList : response})
-            });
+                
+                this.setState({ locationsList: response })
+            })
+           console.log( this.state.locationsList.length);
     }
+
+    rateStation(e) {
+
+
+        var select = document.getElementById('station');
+        var location_id = select.options[select.selectedIndex].value;
+
+        const rating  = {
+            user_id : 51,
+            location_id: location_id,
+            rating: this.state.rate
+        }
+        console.log(JSON.stringify(rating))
+        APIService.postRating(rating)
+            .then((response) => {
+               
+            });
+
+    }
+
     render() {
         return (
             <div id="analytics">
@@ -49,16 +75,44 @@ class Analytics extends React.Component {
                                         <h1>Rate a station</h1>
                                         <select name="charger" id="station" className="paddings">
                                             {
-                                                this.state.locationsList !== 0 ?
+                                                this.state.locationsList.length !== 0 ?
                                                     this.state.locationsList.map((location) => (
-                                                        <option value={location.id}>{location.address}</option>
+                                                        <option value={location.location_id}>{location.address}</option>
                                                     ))
-                                                    : <option value="0">No Charging Station Available</option>
+                                                    : <option value="0">No Charging Stations Available</option>
                                             }
                                         </select><br></br><br></br>
                                         <div className="flex">
-                                            <Rating />
-                                            <input type="submit" value="Rate" className="btn-solid-lg heightButton"></input>
+
+                                            <Container>
+                                                {[...Array(5)].map((item, index) => {
+                                                    const givenRating = index + 1;
+                                                    return (
+                                                        <label>
+                                                            <Radio
+                                                                type="radio"
+                                                                value={givenRating}
+                                                                onClick={() => {
+                                                                    this.setState({ rate: givenRating })
+                                                                }}
+                                                            />
+                                                            <Rating>
+                                                                <FaStar
+                                                                    color={
+                                                                        givenRating < this.state.rate || givenRating === this.state.rate
+                                                                            ? "rgb(254,226,62)"
+                                                                            : "fff"
+                                                                    }
+                                                                />
+                                                            </Rating>
+                                                        </label>
+                                                    );
+                                                })}
+                                            </Container>
+
+
+
+                                            <input onClick={(e) => this.rateStation(e)} type="submit" value="Rate" className="btn-solid-lg heightButton"></input>
                                         </div>
                                     </div>
                                 </div>
