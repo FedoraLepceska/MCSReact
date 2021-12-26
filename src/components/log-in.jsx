@@ -68,11 +68,10 @@ function LogIn(props) {
 
         APIService.login(Login_User)
             .then((response) => {        
-                console.log("id " + response.id);
                 
                 localStorage.setItem('token', JSON.stringify(response.jwtToken));
                 localStorage.setItem('user_id', JSON.stringify(response.id));
-                // console.log(localStorage.getItem('token'))
+                console.log(response)
                 // console.log(localStorage.getItem('user_id'))
                 // console.log(JSON.parse(localStorage.getItem('token')))
                 // console.log(JSON.parse(localStorage.getItem('user_id')))

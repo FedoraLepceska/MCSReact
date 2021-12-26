@@ -54,7 +54,7 @@ class Reserve extends React.Component {
                                             {
                                                 this.state.locationsList !== 0 ?
                                                     this.state.locationsList.map((location) => (
-                                                        <option value={location.id}>{location.address}</option>
+                                                        <option value={location.location_id}>{location.address}</option>
                                                     ))
                                                 : <option value="0">No Charging Station Available</option>
                                             }
@@ -80,8 +80,7 @@ class Reserve extends React.Component {
                                 <div className="col-lg-6 col-xl-7">
                                     <div className="image-container">
                                         <div className="img-wrapper">
-                                            <iframe className="map"
-                                                src="https://www.google.com/maps/d/embed?mid=1fE1jGMC_BN6HX2F03CHACuOvArQ&hl=en&ehbc=2E312F"></iframe>
+                                        <iframe id="map" src="https://www.google.com/maps/d/u/0/embed?mid=118jEnaKYJUGKEKZNdYGQ0w0BKv3WlcHf&ehbc=2E312F" width="640" height="480"></iframe>  
                                         </div>
                                     </div>
                                 </div>

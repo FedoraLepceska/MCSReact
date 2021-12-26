@@ -9,7 +9,7 @@ class FAQs extends React.Component {
     };
 
     componentDidMount(){
-        //window.toggle();
+        window.toggle();
 
     }
 

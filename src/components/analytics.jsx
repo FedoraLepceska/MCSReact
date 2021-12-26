@@ -25,9 +25,10 @@ class Analytics extends React.Component {
         super(props);
         this.state = {
             locationsList: [],
-            rate: 0
+            rate: 0,
+            selected_location_id: 0
         }
-
+        this.handleChange = this.handleChange.bind(this);
     };
 
 
@@ -46,10 +47,12 @@ class Analytics extends React.Component {
 
     rateStation(e) {
 
+        var x = document.getElementById("station").selectedIndex;
+        var y = document.getElementById("station").options.value;
+        console.log(x.value);
 
         var select = document.getElementById('station');
-        var location_id = select.options[select.selectedIndex].value;
-
+        var location_id = select.selectedIndex.value;
         const rating  = {
             user_id : 51,
             location_id: location_id,
@@ -63,6 +66,13 @@ class Analytics extends React.Component {
 
     }
 
+
+    handleChange(e) {
+        this.setState({ selected_location_id: e.target.value });
+        console.log("Location Selected!! " +  this.state.selected_location_id);
+      }
+    
+
     render() {
         return (
             <div id="analytics">
@@ -73,11 +83,12 @@ class Analytics extends React.Component {
                                 <div className="col-lg-6 col-xl-5">
                                     <div className="text-container">
                                         <h1>Rate a station</h1>
-                                        <select name="charger" id="station" className="paddings">
+                                        <select name="charger" id="stationRating" className="paddings"
+                                        value={this.state.selected_location_id} onChange={this.handleChange}>
                                             {
                                                 this.state.locationsList.length !== 0 ?
-                                                    this.state.locationsList.map((location) => (
-                                                        <option value={location.location_id}>{location.address}</option>
+                                                    this.state.locationsList.map((locationRating) => (
+                                                        <option value={locationRating.location_id}>{locationRating.address}</option>
                                                     ))
                                                     : <option value="0">No Charging Stations Available</option>
                                             }
