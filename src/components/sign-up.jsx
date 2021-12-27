@@ -83,8 +83,6 @@ function SignUp(props) {
         e.preventDefault();
        // console.log("clicked");
         document.getElementById("smsgSubmit").innerHTML = "";
-        document.getElementById("msgPass").innerHTML = "";
-
         
         // make API call
         APIService.register(MCS_User)
@@ -195,19 +193,6 @@ function SignUp(props) {
                                         </input>
                                         <div className="help-block with-errors"></div>
                                     </div>
-                                    <div className="form-group">
-                                        <input
-                                            // onChange={(e) => checkPasswords(e)}
-                                            id="confirmPassword"
-                                            placeholder="confirm password"
-                                            type="password"
-                                            value={ConfirmPassword}
-                                            className="form-control-input"
-                                            required>
-                                        </input>
-                                        <div id="msgPass" className="help-block with-errors"></div>
-                                    </div>
-
 
                                     <div className="form-group">
                                         <button type="submit" className="form-control-submit-button"
